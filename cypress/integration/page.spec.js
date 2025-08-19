@@ -285,7 +285,7 @@ describe('Add button', () => {
   });
 
   it('should clear the title field', () => {
-    page.titleField().should('have.text', '');
+    page.titleField().should('have.value', '');
   });
 
   it('should hide the preview', () => {
@@ -322,7 +322,7 @@ describe('Add button', () => {
     page.titleField().type('Rogue{enter}');
     page.addButton().click();
 
-    page.titleField().should('have.text', '');
+    page.titleField().should('have.value', '');
     page.previewContainer().should('not.exist');
     page.addButton().should('not.exist');
   });

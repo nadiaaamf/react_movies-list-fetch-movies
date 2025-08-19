@@ -5,7 +5,8 @@ const API_KEY = '6f5e6816';
 const API_URL = 'https://www.omdbapi.com/';
 
 function convertToMovie(movieData: MovieData): Movie {
-  const defaultImage = 'https://via.placeholder.com/300x450?text=No+Image';
+  const defaultImage =
+    'https://via.placeholder.com/360x270.png?text=no%20preview';
   const imgUrl =
     movieData.Poster === 'N/A' || !movieData.Poster
       ? defaultImage
