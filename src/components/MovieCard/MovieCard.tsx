@@ -1,5 +1,4 @@
-/* eslint-disable no-param-reassign */
-import React from 'react';
+import React, { useState } from 'react';
 import { Movie } from '../../types/Movie';
 import './MovieCard.scss';
 
@@ -8,11 +7,13 @@ interface Props {
 }
 
 export const MovieCard: React.FC<Props> = ({ movie }) => {
-  const handleImageError = (
-    e: React.SyntheticEvent<HTMLImageElement, Event>,
-  ) => {
-    e.currentTarget.src =
-      'https://via.placeholder.com/360x270.png?text=no%20preview';
+  const [imgSrc, setImgSrc] = useState(
+    movie.imgUrl === 'N/A'
+      ? 'https://via.placeholder.com/300x450?text=No+Image'
+      : movie.imgUrl,
+  );
+  const handleImageError = () => {
+    setImgSrc('https://via.placeholder.com/300x450?text=No+Image');
   };
 
   return (
@@ -21,7 +22,7 @@ export const MovieCard: React.FC<Props> = ({ movie }) => {
         <figure className="image is-4by3">
           <img
             data-cy="moviePoster"
-            src={movie.imgUrl}
+            src={imgSrc}
             alt={movie.title}
             onError={handleImageError}
           />
@@ -34,7 +35,12 @@ export const MovieCard: React.FC<Props> = ({ movie }) => {
       </div>
       <div className="content" data-cy="movieDescription">
         {movie.description}
-        <a href={movie.imdbUrl} data-cy="movieURL">
+        <a
+          href={`${movie.imdbUrl}/`}
+          data-cy="movieURL"
+          target="_blank"
+          rel="noreferrer"
+        >
           IMDB
         </a>
       </div>
